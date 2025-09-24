@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio </title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      color: white;
+      background: #111;
+    }
+
+    /* Navbar */
+    nav {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      padding: 15px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      background: none;
+    }
+
+    nav .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #ff4da6;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 10px;
+      margin-top: 40px;
+      margin-left: 0;
+    }
+
+    nav .logo img {
+      width: 250px; /* 5x5 aspect ratio, width */
+      height: 250px; /* 5x5 aspect ratio, height */
+      border-radius: 32px;
+      object-fit: cover;
+      margin-right: 24px;
+      transition: transform 0.6s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    nav .logo img:hover {
+      animation: rotate-logo 1.2s linear 1;
+    }
+
+    @keyframes rotate-logo {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    nav .menu {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav .menu a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: color 0.3s, background 0.3s;
+      padding: 8px 20px;
+      border-radius: 20px;
+      border: none;
+      background: #2906b4;
+      margin-left: 5px;
+      margin-right: 5px;
+      font-size: 16px;
+      display: inline-block;
+    }
+
+    nav .menu a:hover {
+      color: #fff;
+      background: #e63991;
+    }
+
+    .nav-btn-small {
+      padding: 6px 14px;
+      font-size: 14px;
+      border-radius: 16px;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .hero .content {
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-size: 50px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+
+    .hero .btn {
+      padding: 12px 25px;
+      background: #06b446;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+      text-decoration: none;
+    }
+
+    .hero .btn:hover {
+      background: #e63991;
+    }
+
+    /* Projects Section */
+    .projects {
+      padding: 60px 40px;
+      text-align: center;
+      background: #222;
+    }
+
+    .projects h2 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: #39FF14;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(57,255,20,0.18);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: #333;
+      padding: 30px;
+      border-radius: 16px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      min-width: 320px;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px) scale(1.04);
+      box-shadow: 0 8px 24px rgba(230, 35, 5, 0.18), 0 2px 8px rgba(0,0,0,0.18);
+      background: #222;
+      border: 6px solid #ff14ff;
+    }
+
+    .project-card img {
+      width: 100%;
+      max-width: 260px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 12px rgba(57,255,20,0.10);
+    }
+
+    .project-card a {
+      color: #fff;
+      font-size: 22px;
+      font-weight: bold;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    /* Technologies Section */
+    .technologies {
+      padding: 60px 40px;
+      text-align: center;
+      background: #e9e1e1;
+    }
+
+    .technologies h2 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: #ff4da6;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .tech-card {
+      background: #222;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .tech-card::before {
+      content: '';
+      position: absolute;
+      top: -2px; left: -2px; right: -2px; bottom: -2px;
+      background: conic-gradient(from 0deg, #39FF14, #00e0ff, #ff4da6, #39FF14 360deg);
+      z-index: -1;
+      border-radius: 14px;
+      opacity: 0.7;
+      animation: border-rotate 2.5s linear infinite;
+    }
+
+    @keyframes border-rotate {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    .tech-card img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+    }
+
+    .tech-card:hover {
+      transform: scale(1.07) rotate(-2deg);
+      box-shadow: 0 8px 32px rgba(57,255,20,0.22), 0 2px 8px rgba(0,0,0,0.18);
+    }
+
+    /* Education Section */
+    .education {
+      padding: 60px 40px;
+      text-align: center;
+      background: #222;
+    }
+
+    .education h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #ff4da6;
+    }
+
+    /* Flip card container for education and certification */
+    .flip-card {
+      background: transparent;
+      width: 420px;
+      height: 260px;
+      perspective: 1200px;
+      margin: 0 8px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+      transform-style: preserve-3d;
+    }
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(57,255,20,0.10);
+      color: #fff;
+      text-align: center;
+      background: #222;
+      border: 2px solid #39FF14;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 32px 24px 32px;
+    }
+    .flip-card-front h2, .flip-card-back h2 {
+      color: #39FF14;
+      margin-bottom: 18px;
+      font-size: 28px;
+    }
+    .flip-card-front h3, .flip-card-back h3 {
+      color: #fff;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+    .flip-card-front p, .flip-card-back p {
+      margin-bottom: 6px;
+      font-size: 16px;
+    }
+    .flip-card-back {
+      background: #181d2f;
+      border: 2.5px solid #00e0ff;
+      transform: rotateY(180deg);
+    }
+    .flip-card.cert {
+      border: 2px solid #ff4da6;
+    }
+    .flip-card.cert .flip-card-back {
+      background: #2f181d;
+      border: 2.5px solid #ff4da6;
+    }
+
+    /* Certification Section */
+    .certification {
+      padding: 60px 40px;
+      text-align: center;
+      background: #222;
+    }
+
+    .certification h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #ff4da6;
+    }
+
+    .certification-card {
+      background: #222;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(57,255,20,0.10);
+      padding: 32px 32px 24px 32px;
+      max-width: 420px;
+      width: 100%;
+      color: #fff;
+      text-align: center;
+      margin: 0 auto;
+      border: 2px solid #39FF14;
+    }
+
+    .certification-card h2 {
+      color: #39FF14;
+      margin-bottom: 18px;
+      font-size: 28px;
+    }
+
+    .certification-card p {
+      margin-bottom: 6px;
+      font-size: 16px;
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 60px 40px;
+      text-align: center;
+      background: #222;
+    }
+
+    .contact h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #ff4da6;
+    }
+
+    .contact p {
+      margin: 5px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #000;
+      font-size: 14px;
+    }
+
+    /* Responsive for small screens */
+    @media (max-width: 768px) {
+      nav {
+        padding: 15px 25px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+    }
+
+    .neon-circle {
+      position: fixed;
+      pointer-events: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #39FF14 60%, #00e0ff 100%);
+      box-shadow: 0 0 16px 6px #ff14eb, 0 0 32px 12px #00e0ff;
+      opacity: 0.7;
+      z-index: 9999;
+      transform: scale(1);
+      transition: opacity 0.5s, transform 0.5s;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">
+      <img src="logo.jpg" alt="Logo" />
+      
+    </div>
+    <div class="menu">
+      <a href="#hero" class="nav-btn">Home</a>
+      <a href="#projects" class="nav-btn">Projects</a>
+      <a href="#technologies" class="nav-btn">Skills</a>
+      <a href="#education" class="nav-btn nav-btn-small">Education</a>
+      <a href="#certification" class="nav-btn nav-btn-small">Certification</a>
+      <a href="#contact" class="nav-btn">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <video autoplay loop muted playsinline>
+      <source src="100899-video-720.mp4" type="video/mp4" />
+    </video>
+    <div class="content">
+      <h1>Hello, I'm Lekha 👩‍💻</h1>
+      <p>Welcome to my portfolio website</p>
+      <p>FULL STACK DEVELOPER</p>
+      <a href="Associate_developer_lekha.pdf" target="_blank" class="btn">View Resume</a>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="projects" id="projects">
+    <h2>Featured Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <img src="https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg" alt="Weather App" style="width:100%;max-width:180px;border-radius:10px;margin-bottom:12px;" />
+        <a href="weather-app.html" target="_blank">Weather App 🌦</a>
+        <p>Real-time weather forecasting app using Weather API and JavaScript.</p>
+      </div>
+      <div class="project-card">
+        <img src="https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg" alt="Food Delivery App" style="width:100%;max-width:180px;border-radius:10px;margin-bottom:12px;" />
+        <a href="food-delivery.html" target="_blank">Food Delivery App 🍔</a>
+        <p>A full-stack food delivery application built with Spring Boot and React.</p>
+      </div>
+      <div class="project-card">
+        <img src="https://img.freepik.com/free-photo/3d-delivery-robot-working_23-2151150195.jpg?t=st=1731607828~exp=1731611428~hmac=513e9df0c7f5a9c92ef85749eb4ab5df1eeca1fbc3cad8fabfce5e800f9255f9&w=1800" alt="E-commerce Website" style="width:100%;max-width:180px;border-radius:10px;margin-bottom:12px;" />
+        <a href="ecommerce.html" target="_blank">E-commerce Website 🛒</a>
+        <p>Full-featured e-commerce platform with Spring, Hibernate, and MySQL.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technologies Section -->
+  <section class="technologies" id="technologies">
+    <h2>Technical Skills</h2>
+    <div class="tech-grid">
+      
+      <div class="tech-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
+        <p>JAVA</p>
+      </div>
+      <div class="tech-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" />
+        <p>HTML</p>
+      </div>
+      
+        
+
+      <div class="tech-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" />
+        <p>CSS</p>
+      </div>
+      <div class="tech-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS" />
+        <p>JavaScript</p>
+      </div>
+      <div class="tech-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
+        <p>React</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section id="education" style="display: flex; justify-content: center; align-items: flex-start; margin-bottom: 64px; padding-top: 10px; padding-bottom: 10px; scroll-margin-top: 120px; background: linear-gradient(135deg, #181d2f 70%, #39FF14 100%);">
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <h2>Education</h2>
+          <div class="education-details">
+            <h3>B.E. in Computer Science and Engineering</h3>
+            <p>Sri Venkateshwara College of Engineering and Technology, Andhra Pradesh</p>
+            <p>2021 - 2025</p>
+            <p>CGPA: 8.8/10</p>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <h2>Education</h2>
+          <p>Relevant Coursework:</p>
+          <p>Data Structures, Algorithms, Web Development, DBMS, OOP</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certification Section -->
+  <section id="certification" style="display: flex; justify-content: center; align-items: flex-start; margin-bottom: 64px; padding-top: 10px; padding-bottom: 10px; scroll-margin-top: 120px; background: linear-gradient(135deg, #2f181d 70%, #ff4da6 100%);">
+    <div class="flip-card cert">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <h2>Certification</h2>
+          <div class="education-details">
+            <p>Provide your certificate filenames and details here.</p>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <h2>Certification</h2>
+          <h3>FULL STACK DEVELOPMENT</h3>
+          <h3>AI/ML</h3>
+          <h3>Frontend Development</h3>
+          <h3>Data Science</h3>
+          <h3>Python Programming</h3>
+          <p>Certified in Udemy</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact" style="margin-top: 48px;">
+      <h2>Contact Me</h2>
+      <form class="contact-form" style="max-width: 420px; margin: 0 auto; background: #181d2f; border-radius: 14px; padding: 28px 24px; box-shadow: 0 2px 8px rgba(57,255,20,0.10);">
+        <div style="margin-bottom: 16px;">
+          <input type="text" name="name" placeholder="Your Name" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #39FF14; background: #222; color: #fff;">
+        </div>
+        <div style="margin-bottom: 16px;">
+          <input type="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #39FF14; background: #222; color: #fff;">
+        </div>
+        <div style="margin-bottom: 16px;">
+          <textarea name="message" placeholder="Your Message" rows="4" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #39FF14; background: #222; color: #fff;"></textarea>
+        </div>
+        <button type="submit" style="background: #ff1433; color: #2f182b; font-weight: bold; border: none; border-radius: 8px; padding: 10px 24px; cursor: pointer; transition: background 0.2s;">Send Message</button>
+      </form>
+    </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Lekha | All Rights Reserved
+    <div style="margin-top: 20px;">
+      <a href="https://github.com/Lekha6" target="_blank" style="color:#fbff14;font-weight:bold;text-decoration:none;margin-right:18px;">GitHub</a>
+      <a href="https://www.linkedin.com/in/lekha-ga64a41291" target="_blank" style="color:#ff142f;font-weight:bold;text-decoration:none;">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script>
+      // Unique mousemove effect: floating neon circles
+      document.addEventListener('mousemove', function(e) {
+        const circle = document.createElement('div');
+        circle.className = 'neon-circle';
+        circle.style.left = e.clientX + 'px';
+        circle.style.top = e.clientY + 'px';
+        document.body.appendChild(circle);
+        setTimeout(() => {
+          circle.style.opacity = '0';
+          circle.style.transform = 'scale(2)';
+        }, 10);
+        setTimeout(() => {
+          circle.remove();
+        }, 600);
+      });
+    </script>
+</body>
+</html>
