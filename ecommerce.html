@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecommerce Website Project</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f8ffae, #43c6ac);
+      padding: 30px;
+      color: #333;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #222;
+      padding: 15px 40px;
+      border-radius: 10px;
+      color: white;
+      margin-bottom: 30px;
+    }
+
+    .navbar h1 {
+      font-size: 22px;
+    }
+
+    .navbar .cart {
+      background: #ff6347;
+      padding: 8px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* Product Grid */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .product {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .product:hover {
+      transform: scale(1.05);
+    }
+
+    .product img {
+      max-width: 100%;
+      height: 150px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .product h3 {
+      margin: 10px 0;
+    }
+
+    .product p {
+      margin: 5px 0;
+      color: #666;
+    }
+
+    .product button {
+      padding: 10px 15px;
+      background: #222;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .product button:hover {
+      background: #444;
+    }
+
+    /* Project Details Section */
+    .project-details {
+      margin: 40px auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      max-width: 900px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .project-details h2 {
+      margin-bottom: 15px;
+      text-align: center;
+      color: #222;
+    }
+
+    .project-details p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .features, .technologies {
+      margin: 20px 0;
+    }
+
+    .features ul {
+      list-style: square;
+      padding-left: 20px;
+    }
+
+    .tech-logos {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .tech-logos img {
+      height: 60px;
+      width: auto;
+      transition: transform 0.3s;
+    }
+
+    .tech-logos img:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <h1>My Ecommerce</h1>
+    <div class="cart">🛒 Cart (0)</div>
+  </div>
+
+  <!-- Products -->
+  <div class="products">
+    <div class="product">
+      <img src="https://via.placeholder.com/150" alt="Product 1">
+      <h3>Smartphone</h3>
+      <p>₹25,000</p>
+      <button onclick="addToCart()">Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/150" alt="Product 2">
+      <h3>Headphones</h3>
+      <p>₹2,000</p>
+      <button onclick="addToCart()">Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/150" alt="Product 3">
+      <h3>Laptop</h3>
+      <p>₹55,000</p>
+      <button onclick="addToCart()">Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/150" alt="Product 4">
+      <h3>Smartwatch</h3>
+      <p>₹7,000</p>
+      <button onclick="addToCart()">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- Project Details Section -->
+  <div class="project-details">
+    <h2>🛍 Project Description</h2>
+    <p>
+      The Ecommerce Website is a responsive frontend project that simulates an online shopping platform. 
+      Users can browse through a list of products and add them to a shopping cart. This project demonstrates 
+      the structure and design of a real-world ecommerce application.
+    </p>
+
+    <div class="features">
+      <h2>✨ Key Features</h2>
+      <ul>
+        <li>Responsive product grid layout</li>
+        <li>Interactive Add to Cart button</li>
+        <li>Dynamic cart counter update</li>
+        <li>Attractive UI with hover effects</li>
+        <li>Simple & clean code for beginners</li>
+      </ul>
+    </div>
+
+    <div class="technologies">
+      <h2>🛠 Technologies Used</h2>
+      <div class="tech-logos">
+        <div>
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML Logo">
+          <p style="text-align:center;">HTML5</p>
+        </div>
+        <div>
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS Logo">
+          <p style="text-align:center;">CSS3</p>
+        </div>
+        <div>
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS Logo">
+          <p style="text-align:center;">JavaScript</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    let cartCount = 0;
+
+    function addToCart() {
+      cartCount++;
+      document.querySelector(".cart").innerText = `🛒 Cart (${cartCount})`;
+    }
+  </script>
+</body>
+</html>

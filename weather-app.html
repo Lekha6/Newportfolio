@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App Project</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+      padding: 30px;
+      color: #333;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      width: 400px;
+      margin: 0 auto;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #222;
+    }
+
+    .search-box {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .search-box input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px 0 0 8px;
+      outline: none;
+      width: 70%;
+    }
+
+    .search-box button {
+      padding: 10px 15px;
+      border: none;
+      background: #333;
+      color: white;
+      border-radius: 0 8px 8px 0;
+      cursor: pointer;
+    }
+
+    .weather-result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #444;
+    }
+
+    /* Project Details Section */
+    .project-details {
+      margin: 40px auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      max-width: 800px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .project-details h2 {
+      margin-bottom: 15px;
+      text-align: center;
+      color: #222;
+    }
+
+    .project-details p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .features, .technologies {
+      margin: 20px 0;
+    }
+
+    .features ul {
+      list-style: square;
+      padding-left: 20px;
+    }
+
+    .tech-logos {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .tech-logos img {
+      height: 60px;
+      width: auto;
+      transition: transform 0.3s;
+    }
+
+    .tech-logos img:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <!-- Weather App -->
+  <div class="container">
+    <h1>Weather App</h1>
+    <div class="search-box">
+      <input type="text" id="city" placeholder="Enter city name">
+      <button onclick="getWeather()">Search</button>
+    </div>
+    <div class="weather-result" id="result">
+      <!-- Weather data will appear here -->
+    </div>
+  </div>
+
+  <!-- Project Details Section -->
+  <div class="project-details">
+    <h2>🌦 Project Description</h2>
+    <p>
+      The Weather App is a simple web-based application that allows users to check real-time weather information 
+      for any city around the world. It fetches live data such as temperature, humidity, wind speed, and weather 
+      conditions using the <b>OpenWeatherMap API</b>.
+    </p>
+
+    <div class="features">
+      <h2>✨ Key Features</h2>
+      <ul>
+        <li>Search weather by city name</li>
+        <li>Displays temperature, humidity, wind speed, and weather condition</li>
+        <li>Real-time weather updates using API</li>
+        <li>Responsive and user-friendly design</li>
+        <li>Error handling for invalid city input</li>
+      </ul>
+    </div>
+
+    <div class="technologies">
+      <h2>🛠 Technologies Used</h2>
+      <div class="tech-logos">
+        <div>
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML Logo">
+          <p style="text-align:center;">HTML5</p>
+        </div>
+        <div>
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS Logo">
+          <p style="text-align:center;">CSS3</p>
+        </div>
+        <div>
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS Logo">
+          <p style="text-align:center;">JavaScript</p>
+        </div>
+        <div>
+          <img src="https://img.icons8.com/color/96/000000/api.png" alt="API Logo">
+          <p style="text-align:center;">OpenWeather API</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    // Free API from https://openweathermap.org/api
+    const API_KEY = "YOUR_API_KEY"; // Replace with your key
+
+    async function getWeather() {
+      const city = document.getElementById("city").value;
+      const resultDiv = document.getElementById("result");
+
+      if (city === "") {
+        resultDiv.innerHTML = "<p>Please enter a city name.</p>";
+        return;
+      }
+
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.cod === "404") {
+          resultDiv.innerHTML = "<p>City not found.</p>";
+          return;
+        }
+
+        resultDiv.innerHTML = `
+          <h2>${data.name}, ${data.sys.country}</h2>
+          <p>🌡 Temp: ${data.main.temp}°C</p>
+          <p>☁ Weather: ${data.weather[0].description}</p>
+          <p>💧 Humidity: ${data.main.humidity}%</p>
+          <p>🌬 Wind: ${data.wind.speed} m/s</p>
+        `;
+      } catch (error) {
+        resultDiv.innerHTML = "<p>Error fetching data.</p>";
+      }
+    }
+  </script>
+</body>
+</html>
